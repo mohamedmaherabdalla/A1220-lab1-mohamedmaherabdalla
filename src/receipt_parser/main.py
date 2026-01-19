@@ -2,20 +2,20 @@
 import json
 import argparse
 from . import file_io as io_mod
-from . import gpt_mock as gpt  # Change import to gpt_mock as gpt per professor's fix
+from . import gpt_mock as gpt
 
 def process_directory(dirpath):
     """
-    Processes all receipt images in a directory and extracts their information.
+    Orchestrates the processing of a directory containing receipt images.
 
-    This function iterates through the files in the given directory, encodes them,
-    calls the language model to extract data, and cleans the amount field. [cite: 44]
+    It iterates through the files, encodes them, extracts information using 
+    the language model, and applies amount cleaning.
 
     Args:
-        dirpath (str): The path to the directory containing receipt images. [cite: 46]
+        dirpath (str): The path to the directory containing receipt images.
 
     Returns:
-        dict: A dictionary mapping filenames to their extracted information. [cite: 46]
+        dict: A dictionary mapping filenames to their extracted and cleaned data.
     """
     results = {}
     for name, path in io_mod.list_files(dirpath):
@@ -30,9 +30,9 @@ def process_directory(dirpath):
 
 def main():
     """
-    Main entry point for the receipt parser application.
+    Entry point for the command-line interface.
 
-    Parses command-line arguments to get the directory path and execution options. [cite: 10]
+    Parses arguments, processes the directory, and prints the result as JSON.
     """
     parser = argparse.ArgumentParser()
     parser.add_argument("dirpath")

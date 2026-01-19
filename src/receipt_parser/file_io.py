@@ -4,26 +4,26 @@ import base64
 
 def encode_file(path):
     """
-    Reads a file from the specified path and encodes its content into a base64 string.
+    Reads a file from disk and encodes its content into a base64 string.
 
     Args:
-        path (str): The file system path to the image file to be encoded.
+        path (str): The absolute or relative path to the image file.
 
     Returns:
-        str: A UTF-8 decoded base64 string representing the file's binary data.
+        str: The base64 encoded string representing the file content.
     """
     with open(path, "rb") as f:
         return base64.b64encode(f.read()).decode("utf-8")
 
 def list_files(dirpath):
     """
-    Scans a directory and yields the filename and full path for each file found.
+    Iterates through a directory and yields the filename and full path of each file.
 
     Args:
-        dirpath (str): The directory path to search for files.
+        dirpath (str): The path to the directory containing receipt images.
 
     Yields:
-        tuple: A tuple containing the filename (str) and its absolute or relative path (str).
+        tuple: A tuple containing the filename (str) and the full path (str).
     """
     for name in os.listdir(dirpath):
         path = os.path.join(dirpath, name)

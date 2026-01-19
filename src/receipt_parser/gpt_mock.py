@@ -42,10 +42,10 @@ def extract_receipt_info(img):
 
 def clean_amount(amount_str):
     """
-    Cleans the currency string and converts it to a float.
-    
+    Processes the raw string from the model to remove currency symbols and convert to float. [cite: 63]
+
     Args:
-        amount_str (str): The amount as a string (e.g., "$51.30").
+        amount_str (str): The amount as a string (e.g., "$51.30"). [cite: 46]
         
     Returns:
         float: The numeric value (e.g., 51.3). Returns 0.0 if invalid.

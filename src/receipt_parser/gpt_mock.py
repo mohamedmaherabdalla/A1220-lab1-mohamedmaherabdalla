@@ -1,3 +1,5 @@
+# gpt_mock.py
+
 values = [{
     "receipt_1_food.jpg": {
         "date": None,
@@ -27,18 +29,27 @@ values = [{
 
 
 def extract_receipt_info(img):
+    """
+    Simulates calling a language model to extract information from a receipt image. [cite: 46]
+
+    Args:
+        img (str): The base64 encoded string of the receipt image. [cite: 46]
+
+    Returns:
+        dict: A dictionary containing the date, amount, vendor, and category. [cite: 46]
+    """
     name = list(values[0].keys())[0]
     return values.pop(0)[name]
 
 def clean_amount(amount_str):
     """
-    Cleans the currency string and converts it to a float.
-    
+    Processes the raw string from the model to remove currency symbols and convert to float. [cite: 63]
+
     Args:
-        amount_str (str): The amount as a string (e.g., "$51.30").
+        amount_str (str): The amount as a string (e.g., "$51.30"). [cite: 46]
         
     Returns:
-        float: The numeric value (e.g., 51.3).
+        float: The numeric value (e.g., 51.3). Returns 0.0 if invalid. [cite: 46, 63]
     """
     if amount_str is None:
         return 0.0
@@ -46,5 +57,5 @@ def clean_amount(amount_str):
     clean_str = str(amount_str).replace("$", "").replace(",", "").strip()
     try:
         return float(clean_str)
-    except ValueError:
+    except (ValueError, TypeError):
         return 0.0
